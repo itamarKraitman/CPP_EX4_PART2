@@ -26,6 +26,12 @@ namespace ariel
         void print() ;
         vector<Character *> getSquad();
         int getSize();
+
+         virtual ~Team() = default;                   // destructor
+        Team(const Team &) = delete;            // Copy constructor
+        Team &operator=(const Team &) = delete; // Copy assignment operator
+        Team(Team &&) = delete;                 // Move constructor
+        Team &operator=(Team &&) = delete;      // Move assignment operator
     };
 }
 
