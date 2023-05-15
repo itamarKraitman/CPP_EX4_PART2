@@ -1,4 +1,12 @@
 #include "Cowboy.hpp"
+#include <iostream>
+#include <sstream>
+#include <vector>
+
+using namespace std;
+
+
+using namespace std;
 
 namespace ariel
 {
@@ -13,7 +21,7 @@ namespace ariel
 
     bool Cowboy::hasboolets()
     {
-        return false;
+        return this->bullets > 0;
     }
 
     void Cowboy::reload()
@@ -23,7 +31,13 @@ namespace ariel
 
     string Cowboy::print()
     {
-        return "";
+        stringstream ss;
+        ss << "C (" << this->name << "), Point: <" << this->location.getX() << "," << this->location.getY() << ">";
+        if (this->isAlive())
+        {
+            ss <<  ", Hit Points: " << this->hitPoints << endl;
+        }
+        return ss.str();
     }
 
     int Cowboy::getAmoutOfBullets() const

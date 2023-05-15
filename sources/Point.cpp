@@ -19,9 +19,9 @@ namespace ariel
         cout << "(" << xcr << ", " << ycr << ")" << endl;
     }
 
-    Point Point::moveTowards(Point other)
+    Point Point::moveTowards(Point p1, Point p2, double dist)
     {
-        return other;
+        return p1;
     }
 
     double Point::getX() const

@@ -1,8 +1,9 @@
-#include "Team.hpp"
+#include "all_headers.hpp"
+#include  <iostream>
 
 namespace ariel
 {
-    Team::Team(Character *leader) : teamInterface(leader)
+    Team::Team(Character *leader) : leader(leader)
     {
         add(leader);
     }
@@ -12,7 +13,7 @@ namespace ariel
         return;
     }
 
-    void Team::attack(teamInterface *enemy)
+    void Team::attack(Team *enemy)
     {
         return;
     }

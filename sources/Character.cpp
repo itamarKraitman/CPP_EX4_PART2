@@ -6,7 +6,7 @@ namespace ariel
 
     bool Character::isAlive() const
     {
-        return true;
+        return this->hitPoints > 0;
     }
 
     double Character::distance(Character *other)

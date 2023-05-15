@@ -1,23 +1,29 @@
 #ifndef TEAM_HPP
 #define TEAM_HPP
 
-#include "teamInterface.hpp"
+#include <iostream>
+#include <vector>
+#include "OldNinja.hpp"
+#include "YoungNinja.hpp"
+#include "TrainedNinja.hpp"
+#include "Cowboy.hpp"
 
 namespace ariel
 {
-    class Team : public virtual teamInterface
-    {
+    using namespace std;
 
-        std::vector<Cowboy *> cowboys;
-        std::vector<Ninja *> ninjas;
+    class Team 
+    {
+        vector<Cowboy *> cowboys;
+        vector<Ninja *> ninjas;
         Character *leader;
 
     public:
         Team(Character * leader);
-        void add(Character *character) override;
-        void attack(teamInterface *enemy) override;
-        int stillAlive() override;
-        void print() override;
+        virtual void add(Character *character);
+        virtual void attack(Team *enemy) ;
+        int stillAlive() ;
+        void print() ;
         vector<Character *> getSquad();
         int getSize();
     };

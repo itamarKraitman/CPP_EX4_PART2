@@ -1,24 +1,15 @@
 #ifndef SMARTTEAM_HPP
 #define SMARTTEAM_HPP
 
-#include "teamInterface.hpp"
-
+#include "Team.hpp"
 namespace ariel
 {
-    class SmartTeam : public virtual teamInterface
+    class SmartTeam : public Team
     {
-        std::vector<Character *> squad;
-        Character *leader;
-
     public:
         SmartTeam(Character *);
         void add(Character *character) override;
-        void attack(teamInterface *enemy) override;
-        int stillAlive() override;
-        void print() override;
-        vector<Character *> getEnemy(SmartTeam *);
-        vector<Character *> getSquad();
-        int getSize();
+        void attack(Team *enemy) override;
     };
 }
 

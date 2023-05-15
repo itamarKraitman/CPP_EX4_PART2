@@ -1,4 +1,8 @@
-#pragma once
+#ifndef CHARACTER_H
+#define CHARACTER_H
+
+#include <iostream>
+
 #include "Point.hpp"
 #include <string>
 using namespace std;
@@ -7,11 +11,12 @@ namespace ariel
 {
     class Character
     {
+
+    public:
         Point location;
         int hitPoints;
         string name;
 
-    public:
         Character();
         Character(string, Point, int);
 
@@ -32,3 +37,4 @@ namespace ariel
     };
 
 }
+#endif

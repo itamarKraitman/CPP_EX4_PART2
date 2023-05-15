@@ -1,4 +1,7 @@
-#pragma once
+#ifndef COWBOY_HPP
+#define COWBOY_HPP
+
+
 #include "Character.hpp"
 
 namespace ariel
@@ -16,3 +19,5 @@ namespace ariel
         int getAmoutOfBullets() const;
     };
 }
+
+#endif // !COWBOY_HPP

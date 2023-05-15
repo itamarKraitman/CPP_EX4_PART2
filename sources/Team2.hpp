@@ -1,24 +1,17 @@
 #ifndef TEAM2_HPP
 #define TEAM2_HPP
 
-#include "teamInterface.hpp"
+#include "Team.hpp"
 
 namespace ariel
 {
-    class Team2 : public virtual teamInterface
+    class Team2 : public Team
     {
-        std::vector<Character *> squad;
-        Character *leader;
-
     public:
         Team2(Character * leader);
 
         void add(Character *character) override;
-        void attack(teamInterface *enemy) override;
-        int stillAlive() override;
-        void print() override;
-        vector<Character *> getSquad();
-        int getSize() const;
+        void attack(Team *enemy) override;
     };
 }
 

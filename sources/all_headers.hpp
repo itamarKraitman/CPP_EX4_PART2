@@ -5,4 +5,6 @@
 #include "SmartTeam.hpp"
 #include "Team.hpp"
 #include "Team2.hpp"
-#include "teamInterface.hpp"
+#include "YoungNinja.hpp"
+#include "OldNinja.hpp"
+#include "TrainedNinja.hpp"

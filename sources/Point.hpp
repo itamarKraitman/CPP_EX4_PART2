@@ -1,4 +1,5 @@
-#pragma once
+#ifndef POINT_HPP
+#define POINT_HPP
 
 namespace ariel
 {
@@ -12,9 +13,13 @@ namespace ariel
         Point(double, double);
         double distance(Point);
         void print();
-        Point moveTowards(Point);
+        static Point moveTowards(Point p1, Point p2, double distance);
+        void setX(double xrc);
+        void yetX(double yrc);
         double getX() const;
         double getY() const;
     };
 
 }
+
+#endif

@@ -24,17 +24,4 @@ namespace ariel
     {
         return this->speed;
     }
-
-    OldNinja::OldNinja(string name, Point location) : Ninja(name, location, 150, 8)
-    {
-    }
-
-    YoungNinja::YoungNinja(string name, Point location) : Ninja(name, location, 100, 14)
-    {
-    }
-
-    TrainedNinja::TrainedNinja(string name, Point location) : Ninja(name, location, 120, 12)
-    {
-    }
-
 }
