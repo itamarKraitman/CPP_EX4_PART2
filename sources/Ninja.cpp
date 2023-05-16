@@ -4,31 +4,18 @@
 
 namespace ariel
 {
-    Ninja::Ninja(string name, Point location, int hitPoints, int speed) : Character(name, location, hitPoints), speed(speed)
+    Ninja::Ninja(string name, Point location, int hitPoints, int speed) : Character(name, location, hitPoints, 2), speed(speed)
     {
     }
 
     void Ninja::move(const Character *enemy)
     {
         // calculate the distance between the ninja to the enemy
-        double distanceBetweenPoints = this->location.distance(enemy->location);
+        double distanceBetween = this->location.distance(enemy->location);
 
         // if the distance is less or equal than the speed, stop at the same location as the enemy
-        if (distanceBetweenPoints <= this->speed)
-        {
-            this->location = enemy->location;
-        }
-        else
-        {
-            // calculate the vector between the ninja's location to the enemy's
-            double drX = this->location.getX() - enemy->location.getX();
-            double drY = this->location.getY() - enemy->location.getY();
-            double directionX = drX / distanceBetweenPoints;
-            double directionY = drY / distanceBetweenPoints;
-
-            this->location.setX(this->location.getX() + directionX * this->speed);
-            this->location.setY(this->location.getY() + directionY * this->speed);
-        }
+        Point newLocation = Point::moveTowards(this->location, enemy->getLocation(), distanceBetween);
+        this->location = newLocation;
     }
 
     bool Ninja::slash(Character *enemy)
@@ -64,6 +51,7 @@ namespace ariel
         else
         {
             cout << enemy->getName() << " is too far! No damage was made by Ninja " << this->name << endl;
+            
             return false;
         }
     }

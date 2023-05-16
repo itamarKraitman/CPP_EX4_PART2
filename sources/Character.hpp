@@ -16,9 +16,10 @@ namespace ariel
         Point location;
         int hitPoints;
         string name;
+        int ninjaOrCowboy; // cowboy = 1, ninja = 2
 
         Character();
-        Character(string, Point, int);
+        Character(string name, Point po, int hp, int ninjaOrCowboy);
 
         bool isAlive() const;
         double distance(Character *);
@@ -27,6 +28,8 @@ namespace ariel
         Point setLocation(Point other);
         int getHitPoints() const;
         void hit(int points);
+        int isNinjaOrCowboy();
+        bool isDead();
         virtual string print() = 0;
 
         virtual ~Character() = default;                   // destructor

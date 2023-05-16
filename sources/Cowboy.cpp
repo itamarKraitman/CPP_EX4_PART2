@@ -8,7 +8,7 @@ using namespace std;
 
 namespace ariel
 {
-    Cowboy::Cowboy(string name, Point location) : Character(name, location, 110), bullets(6)
+    Cowboy::Cowboy(string name, Point location) : Character(name, location, 110, 1), bullets(6)
     {
     }
 
@@ -34,8 +34,17 @@ namespace ariel
             throw std::runtime_error("Attacking dead Character");
         }
 
-        enemy->hit(10);
-        this->bullets--;
+        if (hasboolets) // if has boolets, hit, otherwise, reload
+        {
+            enemy->hit(10);
+            this->bullets--;    
+        }
+        else
+        {
+            this->reload();
+        }
+
+        
     }
 
     bool Cowboy::hasboolets()

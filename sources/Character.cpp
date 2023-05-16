@@ -2,7 +2,7 @@
 namespace ariel
 {
     Character::Character() {}
-    Character::Character(string name, Point location, int hitPoints) : name(name), location(location), hitPoints(hitPoints) {}
+    Character::Character(string name, Point location, int hitPoints, int ninjaOrCowboy) : name(name), location(location), hitPoints(hitPoints), ninjaOrCowboy(ninjaOrCowboy) {}
 
     bool Character::isAlive() const
     {
@@ -46,4 +46,16 @@ namespace ariel
             throw std::invalid_argument("Negative hit points is invalid");
         }
     }
+
+    int Character::isNinjaOrCowboy() 
+    {
+        return this->ninjaOrCowboy;
+    }
+
+    bool Character::isDead()
+    {
+        return !this->isAlive();
+    }
+
+
 }

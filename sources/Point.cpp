@@ -19,9 +19,21 @@ namespace ariel
         cout << "(" << xcr << ", " << ycr << ")" << endl;
     }
 
-    Point Point::moveTowards(Point po1, Point po2, double dist)
+    Point Point::moveTowards(Point origin, Point destination, double dist)
     {
-        return po1;
+        double currentDistance = origin.distance(destination);
+
+        if (currentDistance <= dist)
+        {
+            return destination;
+        }
+
+        double ratio = dist / currentDistance;
+        double newX = origin.getX() + ratio * (destination.getX() - origin.getX());
+        double newY = origin.getY() + ratio * (destination.getY() - origin.getY());
+
+        Point closestPoint{newX, newY};
+        return closestPoint;
     }
 
     double Point::getX() const
@@ -34,10 +46,11 @@ namespace ariel
         return this->ycr;
     }
 
-    void Point::setX(double xcr) {
+    void Point::setX(double xcr)
+    {
         this->xcr = xcr;
     }
-    
+
     void Point::setY(double ycr)
     {
         this->ycr = ycr;
