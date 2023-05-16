@@ -15,6 +15,9 @@ namespace ariel
         virtual bool slash(Character *other);
         string print() override;
         int getSpeed() const;
+
+        bool operator==(const Character& other) const;
+        bool operator!=(const Character& other) const;
     };
 }
 

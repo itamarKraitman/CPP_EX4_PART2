@@ -37,7 +37,13 @@ namespace ariel
 
     void Character::hit(int points)
     {
-        this->hitPoints -= points;
+        if (points > 0)
+        {
+            this->hitPoints -= points;
+        }
+        else
+        {
+            throw std::invalid_argument("Negative hit points is invalid");
+        }
     }
-
 }

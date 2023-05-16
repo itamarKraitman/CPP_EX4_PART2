@@ -19,9 +19,9 @@ namespace ariel
         cout << "(" << xcr << ", " << ycr << ")" << endl;
     }
 
-    Point Point::moveTowards(Point p1, Point p2, double dist)
+    Point Point::moveTowards(Point po1, Point po2, double dist)
     {
-        return p1;
+        return po1;
     }
 
     double Point::getX() const
@@ -32,5 +32,14 @@ namespace ariel
     double Point::getY() const
     {
         return this->ycr;
+    }
+
+    void Point::setX(double xcr) {
+        this->xcr = xcr;
+    }
+    
+    void Point::setY(double ycr)
+    {
+        this->ycr = ycr;
     }
 }
