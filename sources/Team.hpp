@@ -25,13 +25,13 @@ namespace ariel
         Team(Character *leader);
         virtual void add(Character *character);
         virtual void attack(Team *enemy);
-        int stillAlive();
-        void print();
+        virtual int stillAlive();
+        virtual void print();
         vector<Character *> getSquad();
         int getSize();
         Character *getLeader();
         void setTeamLeader(Character *newLeader);
-        Character* pickTeamMember(Character* teamMember);
+        virtual Character* pickTeamMember(Character* teamMember);
 
         virtual ~Team() = default;              // destructor
         Team(const Team &) = delete;            // Copy constructor

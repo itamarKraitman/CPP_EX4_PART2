@@ -34,7 +34,7 @@ namespace ariel
             throw std::runtime_error("Attacking dead Character");
         }
 
-        if (hasboolets) // if has boolets, hit, otherwise, reload
+        if (hasboolets()) // if has boolets, hit, otherwise, reload
         {
             enemy->hit(10);
             this->bullets--;    
