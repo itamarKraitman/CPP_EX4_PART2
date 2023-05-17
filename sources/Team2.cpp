@@ -6,11 +6,12 @@ namespace ariel
     Team2::Team2(Character *leader) : Team(leader)
     {
         // no need to insert leader, it has already inserted from Team cunstrctor
+        this->setType(2);
     }
 
     void Team2::add(Character *newMember)
     {
-        if (this->squad.size() == 10)
+        if (this->getSquad().size() == 10)
         {
             throw std::runtime_error("Team can has up to 10 members");
         }
@@ -20,7 +21,8 @@ namespace ariel
             throw std::runtime_error("Character is already assigned to a team");
         }
 
-        this->squad.push_back(newMember);
+        this->addToSquad(newMember);
+        newMember->assignToTeam();
     }
 
     void Team2::attack(Team *enemy)
@@ -31,22 +33,23 @@ namespace ariel
             throw std::invalid_argument("nullpter sent as enemy");
         }
 
-        if (this->leader->isDead()) // if the leader is dead, pick a new leader
+        else if (enemy->stillAlive() == 0)
         {
-            this->pickNewLeader(this->leader);
+            throw std::runtime_error("Enemy team is already dead");
+        }
+
+        if (this->getLeader()->isDead()) // if the leader is dead, pick a new leader
+        {
+            this->pickNewLeader(this->getLeader());
         }
 
         // pick a victim, the closest to the leader
-        Character *victim = pickVictim(this->leader, enemy);
+        Character *victim = pickVictim(enemy);
 
         // atack the victim, if the victim dies, pick another victim, if all enemy's members are dead, the attack finishes
-        for (Character *attackTeamMember : this->squad)
+        for (Character *attackTeamMember : this->getSquad())
         {
-            if (enemy->stillAlive() == 0) // if all enemy's members are dead, the attack finishes
-            {
-                break;
-            }
-            else
+            if (attackTeamMember->isAlive())
             {
                 if (victim->isAlive())
                 {
@@ -56,12 +59,22 @@ namespace ariel
                     }
                     else
                     {
-                        dynamic_cast<Ninja *>(attackTeamMember)->slash(victim);
+                        Ninja *temp = dynamic_cast<Ninja *>(attackTeamMember);
+                        bool isHit = temp->slash(victim);
+                        if (!isHit)
+                        {
+                            temp->move(victim);
+                        }
                     }
+                }
+                else if (enemy->stillAlive() > 0)
+                {
+                    victim = pickVictim(enemy);
                 }
                 else
                 {
-                    victim = pickVictim(this->leader, enemy);
+                    cout << "Enemy team is dead!" << endl;
+                    break;
                 }
             }
         }
@@ -70,7 +83,7 @@ namespace ariel
     int Team2::stillAlive()
     {
         int numberOfAllive = 0;
-        for (Character *teamMember : this->squad)
+        for (Character *teamMember : this->getSquad())
         {
             if (teamMember->isAlive())
             {
@@ -85,10 +98,10 @@ namespace ariel
         double shortestDisToLeader = std::numeric_limits<double>::max();
         Character *closerToLeader;
 
-        for (Character *teamMember : this->squad)
+        for (Character *teamMember : this->getSquad())
         {
-            double currentDisToLeader = leader->getLocation().distance(teamMember->getLocation());
-            if (teamMember->isAlive() && teamMember != leader && currentDisToLeader < shortestDisToLeader)
+            double currentDisToLeader = this->getLeader()->getLocation().distance(teamMember->getLocation());
+            if (teamMember->isAlive() && currentDisToLeader < shortestDisToLeader)
             {
                 shortestDisToLeader = currentDisToLeader;
                 closerToLeader = teamMember;
@@ -97,15 +110,15 @@ namespace ariel
         this->setTeamLeader(closerToLeader);
     }
 
-    Character *Team2::pickVictim(Character *teamMember, Team *enemy)
+    Character *Team2::pickVictim(Team *enemy)
     {
         double shortestDisToLeader = std::numeric_limits<double>::max();
         Character *closerToLeader;
 
         for (Character *teamMember : enemy->getSquad())
         {
-            double currentDisToLeader = this->leader->getLocation().distance(teamMember->getLocation());
-            if (teamMember != this->leader && currentDisToLeader < shortestDisToLeader)
+            double currentDisToLeader = this->getLeader()->getLocation().distance(teamMember->getLocation());
+            if (teamMember->isAlive() && currentDisToLeader < shortestDisToLeader)
             {
                 shortestDisToLeader = currentDisToLeader;
                 closerToLeader = teamMember;
@@ -117,7 +130,7 @@ namespace ariel
     void Team2::print()
     {
         string ss;
-        for (Character *teamMember : this->squad)
+        for (Character *teamMember : this->getSquad())
         {
             ss = teamMember->print();
             cout << ss << endl;

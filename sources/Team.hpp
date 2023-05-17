@@ -16,26 +16,28 @@ namespace ariel
 
     class Team
     {
-
-    public:
-        vector<Cowboy *> cowboys;
-        vector<Ninja *> ninjas;
+    private:
         Character *leader;
         vector<Character *> squad;
+        int whichTypeOfTeam; // Team=1, Team2=2, Team3=3
+
+    public:
         Team(Character *leader);
+
         virtual void add(Character *character);
         virtual void attack(Team *enemy);
         virtual int stillAlive();
         virtual void print();
+        void setType(int type);
+        int getType();
         vector<Character *> getSquad();
-        vector<Cowboy *> getCowboys();
-        vector<Ninja *> getNinjas();
+        void addToSquad(Character *newMember);
         int getSize();
         Character *getLeader();
         void setTeamLeader(Character *newLeader);
-        virtual void pickNewLeader(Character* teamMember);
-        virtual Character *pickVictim(Character* teamMember, Team *enemy);
-
+        virtual void pickNewLeader(Character *teamMember);
+        virtual Character *pickVictim(Team *enemy);
+        static bool compareCharacters(Character *first, Character *second);
 
         virtual ~Team() = default;              // destructor
         Team(const Team &) = delete;            // Copy constructor

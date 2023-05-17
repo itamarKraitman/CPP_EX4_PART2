@@ -5,6 +5,8 @@
 
 namespace ariel
 {
+    using namespace std;
+
     class Team2 : public Team
     {
     public:
@@ -13,7 +15,7 @@ namespace ariel
         void add(Character *newMember) override;
         void attack(Team *enemy) override;
         void pickNewLeader(Character* teamMember) override;
-        Character *pickVictim(Character* teamMember, Team *enemy) override;
+        Character *pickVictim(Team *enemy) override;
         int stillAlive() override;
         void print() override;
 

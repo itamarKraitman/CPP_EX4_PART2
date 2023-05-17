@@ -41,8 +41,7 @@ namespace ariel
         Character(Character &&) = delete;                 // Move constructor
         Character &operator=(Character &&) = delete;      // Move assignment operator
 
-        friend bool operator==(const Character &first, const Character &other);
-        friend bool operator!=(const Character &first, const Character &other);
+       
     };
 
 }

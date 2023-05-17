@@ -16,8 +16,7 @@ namespace ariel
         string print() override;
         int getSpeed() const;
 
-        bool operator==(const Character& other) const;
-        bool operator!=(const Character& other) const;
+      
     };
 }
 

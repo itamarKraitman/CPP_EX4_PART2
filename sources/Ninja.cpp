@@ -14,20 +14,19 @@ namespace ariel
         double distanceBetween = this->location.distance(enemy->location);
 
         // if the distance is less or equal than the speed, stop at the same location as the enemy
-        Point newLocation = Point::moveTowards(this->location, enemy->getLocation(), distanceBetween);
+        Point newLocation = Point::moveTowards(this->location, enemy->getLocation(), this->speed);
         this->location = newLocation;
     }
 
     bool Ninja::slash(Character *enemy)
     {
-        if (enemy == nullptr)
-        {
-            throw std::invalid_argument("Null pointer passed");
-        }
-
         if (this == enemy)
         {
             throw std::runtime_error("Character can't attack itself");
+        }
+        else if (enemy == nullptr)
+        {
+            throw std::invalid_argument("Null pointer passed");
         }
 
         if (!enemy->isAlive())
@@ -42,16 +41,18 @@ namespace ariel
         }
 
         // if the enemy is far less than a meter, reduce its hitPoints by 40
-        if (this->location.distance(enemy->location) < 1)
+        if (this->distance(enemy) < 1)
         {
+            cout << "distance to enemy: " << this->distance(enemy) << endl;
             cout << enemy->getName() << " was hit by Ninja " << this->name << endl;
             enemy->hit(40);
             return true;
         }
         else
         {
+            cout << "distance to enemy: " << this->distance(enemy) << endl;
+
             cout << enemy->getName() << " is too far! No damage was made by Ninja " << this->name << endl;
-            
             return false;
         }
     }
@@ -77,15 +78,4 @@ namespace ariel
         return this->speed;
     }
 
-    bool Ninja::operator==(const Character &other) const
-    {
-
-        return this == &(static_cast<const Ninja &>(other));
-    }
-
-    bool Ninja::operator!=(const Character &other) const
-    {
-
-        return this != &(static_cast<const Ninja &>(other));
-    }
 }

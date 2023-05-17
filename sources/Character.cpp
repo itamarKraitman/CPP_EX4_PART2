@@ -6,7 +6,7 @@ namespace ariel
 
     bool Character::isAlive() const
     {
-        return this->hitPoints > 0;
+        return (this->hitPoints > 0);
     }
 
     double Character::distance(Character *other)
@@ -65,18 +65,6 @@ namespace ariel
     bool Character::isAssignedToTeam()
     {
         return this->assignedToTeam;
-    }
-
-    bool operator==(const Character &first, const Character &other)
-    {
-
-        return &first == &other;
-    }
-
-    bool operator!=(const Character &first, const Character &other)
-    {
-
-        return &first == &other;
     }
 
 }

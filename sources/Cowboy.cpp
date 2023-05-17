@@ -14,33 +14,35 @@ namespace ariel
 
     void Cowboy::shoot(Character *enemy)
     {
-        if (enemy == nullptr)
-        {
-            throw std::invalid_argument("Null pointer");
-        }
-
-        if (!this->isAlive())
-        {
-            throw std::runtime_error("Dead Cowboy cant shoot");
-        }
 
         if (this == enemy)
         {
             throw std::runtime_error("Character can't attack itself");
         }
+        else if (enemy == nullptr)
+        {
+            throw std::invalid_argument("Null pointer");
+        }
 
-        if (!enemy->isAlive())
+        else if (!this->isAlive())
+        {
+            throw std::runtime_error("Dead Cowboy cant shoot");
+        }
+
+        else if (!enemy->isAlive())
         {
             throw std::runtime_error("Attacking dead Character");
         }
 
         if (hasboolets()) // if has boolets, hit, otherwise, reload
         {
+            cout << "enemy hit!" << endl;
             enemy->hit(10);
             this->bullets--;
         }
         else
         {
+            cout << "cowboy has not bullets , reload" << endl;
             this->reload();
         }
     }
