@@ -18,7 +18,7 @@ namespace ariel
         {
             throw std::invalid_argument("Null pointer");
         }
-        
+
         if (!this->isAlive())
         {
             throw std::runtime_error("Dead Cowboy cant shoot");
@@ -37,14 +37,12 @@ namespace ariel
         if (hasboolets()) // if has boolets, hit, otherwise, reload
         {
             enemy->hit(10);
-            this->bullets--;    
+            this->bullets--;
         }
         else
         {
             this->reload();
         }
-
-        
     }
 
     bool Cowboy::hasboolets()
@@ -83,18 +81,6 @@ namespace ariel
     int Cowboy::getAmoutOfBullets() const
     {
         return this->bullets;
-    }
-
-    bool Cowboy::operator==(const Character &other) const
-    {
-
-        return this == &(static_cast<const Cowboy &>(other));
-    }
-
-    bool Cowboy::operator!=(const Character &other) const
-    {
-
-        return this != &(static_cast<const Cowboy &>(other));
     }
 
 }

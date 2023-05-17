@@ -25,7 +25,6 @@ namespace ariel
         {
             throw std::runtime_error("Character is already assigned to a team");
         }
-        
 
         if (newMember->isNinjaOrCowboy() == 1) // cowboy
         {
@@ -41,14 +40,18 @@ namespace ariel
 
     void Team::attack(Team *enemy)
     {
-        if (enemy->getLeader()->isDead()) // if the leader is dead, pick a new leader
+        if (enemy == nullptr)
         {
-            Character *newLeader = enemy->pickTeamMember(enemy->getLeader());
-            enemy->setTeamLeader(newLeader);
+            throw std::invalid_argument("nullpter sent as enemy");
+        }
+
+        if (this->leader->isDead()) // if the leader is dead, pick a new leader
+        {
+            this->pickNewLeader(this->leader);
         }
 
         // pick a victim, the closest to the leader
-        Character *victim = pickTeamMember(enemy->getLeader());
+        Character *victim = pickVictim(this->leader, enemy);
         bool enemyIsDead = false;
 
         // atack the victim, if the victim dies, pick another victim, if all enemy's members are dead, the attack finishes
@@ -67,7 +70,7 @@ namespace ariel
                 }
                 else
                 {
-                    victim = pickTeamMember(this->leader);
+                    victim = pickVictim(this->leader, enemy);
                 }
             }
         }
@@ -87,7 +90,7 @@ namespace ariel
                     }
                     else
                     {
-                        victim = pickTeamMember(this->leader);
+                        victim = pickVictim(this->leader, enemy);
                     }
                 }
             }
@@ -134,6 +137,16 @@ namespace ariel
         return this->squad;
     }
 
+    vector<Cowboy *> Team::getCowboys()
+    {
+        return this->cowboys;
+    }
+    
+    vector<Ninja *> Team::getNinjas()
+    {
+        return this->ninjas;
+    }
+
     int Team::getSize()
     {
         return this->squad.size();
@@ -148,15 +161,15 @@ namespace ariel
         this->leader = newLeader;
     }
 
-    Character *Team::pickTeamMember(Character *teamMember)
+    void Team::pickNewLeader(Character *teamMember)
     {
         double shortestDisToLeader = std::numeric_limits<double>::max();
         Character *closerToLeader;
 
         for (Cowboy *teamMember : this->cowboys)
         {
-            double currentDisToLeader = leader->getLocation().distance(teamMember->getLocation());
-            if (teamMember != leader && currentDisToLeader < shortestDisToLeader)
+            double currentDisToLeader = this->leader->getLocation().distance(teamMember->getLocation());
+            if (teamMember != this->leader && currentDisToLeader < shortestDisToLeader)
             {
                 shortestDisToLeader = currentDisToLeader;
                 closerToLeader = teamMember;
@@ -165,8 +178,36 @@ namespace ariel
 
         for (Ninja *teamMember : this->ninjas)
         {
-            double currentDisToLeader = leader->getLocation().distance(teamMember->getLocation());
-            if (teamMember != leader && currentDisToLeader < shortestDisToLeader)
+            double currentDisToLeader = this->leader->getLocation().distance(teamMember->getLocation());
+            if (teamMember->isAlive() && teamMember != this->leader && currentDisToLeader < shortestDisToLeader)
+            {
+                shortestDisToLeader = currentDisToLeader;
+                closerToLeader = teamMember;
+            }
+        }
+
+        this->setTeamLeader(closerToLeader);
+    }
+
+    Character *Team::pickVictim(Character *teamMember, Team *enemy)
+    {
+        double shortestDisToLeader = std::numeric_limits<double>::max();
+        Character *closerToLeader;
+
+        for (Cowboy *teamMember : enemy->getCowboys())
+        {
+            double currentDisToLeader = this->leader->getLocation().distance(teamMember->getLocation());
+            if (teamMember != this->leader && currentDisToLeader < shortestDisToLeader)
+            {
+                shortestDisToLeader = currentDisToLeader;
+                closerToLeader = teamMember;
+            }
+        }
+
+        for (Ninja *teamMember : enemy->getNinjas())
+        {
+            double currentDisToLeader = this->leader->getLocation().distance(teamMember->getLocation());
+            if (teamMember->isAlive() && teamMember != this->leader && currentDisToLeader < shortestDisToLeader)
             {
                 shortestDisToLeader = currentDisToLeader;
                 closerToLeader = teamMember;
@@ -175,4 +216,6 @@ namespace ariel
 
         return closerToLeader;
     }
+
+    
 }

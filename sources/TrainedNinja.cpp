@@ -5,7 +5,7 @@ namespace ariel
 {
     using namespace std;
 
-     TrainedNinja::TrainedNinja(string name, Point location) : Ninja(name, location, 150, 8)
+     TrainedNinja::TrainedNinja(string name, Point location) : Ninja(name, location, 120, 12)
     {
     }
 }

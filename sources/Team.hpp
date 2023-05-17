@@ -28,10 +28,14 @@ namespace ariel
         virtual int stillAlive();
         virtual void print();
         vector<Character *> getSquad();
+        vector<Cowboy *> getCowboys();
+        vector<Ninja *> getNinjas();
         int getSize();
         Character *getLeader();
         void setTeamLeader(Character *newLeader);
-        virtual Character* pickTeamMember(Character* teamMember);
+        virtual void pickNewLeader(Character* teamMember);
+        virtual Character *pickVictim(Character* teamMember, Team *enemy);
+
 
         virtual ~Team() = default;              // destructor
         Team(const Team &) = delete;            // Copy constructor

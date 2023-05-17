@@ -12,7 +12,8 @@ namespace ariel
 
         void add(Character *newMember) override;
         void attack(Team *enemy) override;
-        Character* pickTeamMember(Character* teamMember) override;
+        void pickNewLeader(Character* teamMember) override;
+        Character *pickVictim(Character* teamMember, Team *enemy) override;
         int stillAlive() override;
         void print() override;
 

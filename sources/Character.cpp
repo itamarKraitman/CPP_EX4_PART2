@@ -67,4 +67,16 @@ namespace ariel
         return this->assignedToTeam;
     }
 
+    bool operator==(const Character &first, const Character &other)
+    {
+
+        return &first == &other;
+    }
+
+    bool operator!=(const Character &first, const Character &other)
+    {
+
+        return &first == &other;
+    }
+
 }
