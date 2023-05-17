@@ -35,8 +35,8 @@ namespace ariel
         int getSize();
         Character *getLeader();
         void setTeamLeader(Character *newLeader);
-        virtual void pickNewLeader(Character *teamMember);
-        virtual Character *pickVictim(Team *enemy);
+        void pickNewLeader();
+        Character *pickVictim(Team *enemy);
         static bool compareCharacters(Character *first, Character *second);
 
         virtual ~Team() = default;              // destructor

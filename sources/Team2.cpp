@@ -40,15 +40,17 @@ namespace ariel
 
         if (this->getLeader()->isDead()) // if the leader is dead, pick a new leader
         {
-            this->pickNewLeader(this->getLeader());
+            this->pickNewLeader();
         }
 
         // pick a victim, the closest to the leader
-        Character *victim = pickVictim(enemy);
+        Character *victim;
 
         // atack the victim, if the victim dies, pick another victim, if all enemy's members are dead, the attack finishes
         for (Character *attackTeamMember : this->getSquad())
         {
+            victim = pickVictim(enemy);
+            
             if (attackTeamMember->isAlive())
             {
                 if (victim->isAlive())
@@ -80,60 +82,5 @@ namespace ariel
         }
     }
 
-    int Team2::stillAlive()
-    {
-        int numberOfAllive = 0;
-        for (Character *teamMember : this->getSquad())
-        {
-            if (teamMember->isAlive())
-            {
-                numberOfAllive++;
-            }
-        }
-        return numberOfAllive;
-    }
 
-    void Team2::pickNewLeader(Character *teamMember)
-    {
-        double shortestDisToLeader = std::numeric_limits<double>::max();
-        Character *closerToLeader;
-
-        for (Character *teamMember : this->getSquad())
-        {
-            double currentDisToLeader = this->getLeader()->getLocation().distance(teamMember->getLocation());
-            if (teamMember->isAlive() && currentDisToLeader < shortestDisToLeader)
-            {
-                shortestDisToLeader = currentDisToLeader;
-                closerToLeader = teamMember;
-            }
-        }
-        this->setTeamLeader(closerToLeader);
-    }
-
-    Character *Team2::pickVictim(Team *enemy)
-    {
-        double shortestDisToLeader = std::numeric_limits<double>::max();
-        Character *closerToLeader;
-
-        for (Character *teamMember : enemy->getSquad())
-        {
-            double currentDisToLeader = this->getLeader()->getLocation().distance(teamMember->getLocation());
-            if (teamMember->isAlive() && currentDisToLeader < shortestDisToLeader)
-            {
-                shortestDisToLeader = currentDisToLeader;
-                closerToLeader = teamMember;
-            }
-        }
-        return closerToLeader;
-    }
-
-    void Team2::print()
-    {
-        string ss;
-        for (Character *teamMember : this->getSquad())
-        {
-            ss = teamMember->print();
-            cout << ss << endl;
-        }
-    }
 }
