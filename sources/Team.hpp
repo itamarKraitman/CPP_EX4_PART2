@@ -5,6 +5,7 @@
 #include <vector>
 #include <limits>
 
+#include "Ninja.hpp"
 #include "OldNinja.hpp"
 #include "YoungNinja.hpp"
 #include "TrainedNinja.hpp"

@@ -69,13 +69,13 @@ namespace ariel
         stringstream ss;
         if (this->isAlive())
         {
-            ss << "C " << this->name << ", Point: <" << this->location.getX() << "," << this->location.getY() << ">"
+            ss << "C " << this->getName() << ", Point: <" << this->getLocation().getX() << "," << this->getLocation().getY() << ">"
                                                                                                                  ", Hit Points: "
-               << this->hitPoints << endl;
+               << this->getHitPoints() << endl;
         }
         else
         {
-            ss << "C (" << this->name << "), Point: <" << this->location.getX() << "," << this->location.getY() << ">" << endl;
+            ss << "C (" << this->getName() << "), Point: <" << this->getLocation().getX() << "," << this->getLocation().getY() << ">" << endl;
         }
         return ss.str();
     }

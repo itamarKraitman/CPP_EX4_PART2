@@ -11,14 +11,14 @@ namespace ariel
 {
     class Character
     {
-
-    public:
+    private:
         Point location;
         int hitPoints;
         string name;
         int ninjaOrCowboy; // cowboy = 1, ninja = 2
         bool assignedToTeam;
 
+    public:
         Character();
         Character(string name, Point po, int hp, int ninjaOrCowboy);
 
@@ -28,6 +28,7 @@ namespace ariel
         Point getLocation() const;
         Point setLocation(Point other);
         int getHitPoints() const;
+
         void hit(int points);
         int isNinjaOrCowboy();
         bool isDead();
@@ -40,8 +41,6 @@ namespace ariel
         Character &operator=(const Character &) = delete; // Copy assignment operator
         Character(Character &&) = delete;                 // Move constructor
         Character &operator=(Character &&) = delete;      // Move assignment operator
-
-       
     };
 
 }

@@ -11,11 +11,11 @@ namespace ariel
     void Ninja::move(const Character *enemy)
     {
         // calculate the distance between the ninja to the enemy
-        double distanceBetween = this->location.distance(enemy->location);
+        double distanceBetween = this->getLocation().distance(enemy->getLocation());
 
         // if the distance is less or equal than the speed, stop at the same location as the enemy
-        Point newLocation = Point::moveTowards(this->location, enemy->getLocation(), this->speed);
-        this->location = newLocation;
+        Point newLocation = Point::moveTowards(this->getLocation(), enemy->getLocation(), this->speed);
+        this->setLocation(newLocation);
     }
 
     bool Ninja::slash(Character *enemy)
@@ -44,7 +44,7 @@ namespace ariel
         if (this->distance(enemy) < 1)
         {
             cout << "distance to enemy: " << this->distance(enemy) << endl;
-            cout << enemy->getName() << " was hit by Ninja " << this->name << endl;
+            cout << enemy->getName() << " was hit by Ninja " << this->getName() << endl;
             enemy->hit(40);
             return true;
         }
@@ -52,7 +52,7 @@ namespace ariel
         {
             cout << "distance to enemy: " << this->distance(enemy) << endl;
 
-            cout << enemy->getName() << " is too far! No damage was made by Ninja " << this->name << endl;
+            cout << enemy->getName() << " is too far! No damage was made by Ninja " << this->getName() << endl;
             return false;
         }
     }
@@ -62,13 +62,13 @@ namespace ariel
         stringstream ss;
         if (this->isAlive())
         {
-            ss << "N " << this->name << ", Point: <" << this->location.getX() << "," << this->location.getY() << ">"
+            ss << "N " << this->getName() << ", Point: <" << this->getLocation().getX() << "," << this->getLocation().getY() << ">"
                                                                                                                  ", Hit Points: "
-               << this->hitPoints << endl;
+               << this->getHitPoints() << endl;
         }
         else
         {
-            ss << "N (" << this->name << "), Point: <" << this->location.getX() << "," << this->location.getY() << ">" << endl;
+            ss << "N (" << this->getName() << "), Point: <" << this->getLocation().getX() << "," << this->getLocation().getY() << ">" << endl;
         }
         return ss.str();
     }

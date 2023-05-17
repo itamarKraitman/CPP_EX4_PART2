@@ -36,7 +36,7 @@ namespace ariel
     }
 
     void Character::hit(int points)
-    {
+    {        
         if (points > 0)
         {
             this->hitPoints -= points;
@@ -51,6 +51,7 @@ namespace ariel
     {
         return this->ninjaOrCowboy;
     }
+
 
     bool Character::isDead()
     {
