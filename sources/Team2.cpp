@@ -5,17 +5,22 @@ namespace ariel
 {
     Team2::Team2(Character *leader) : Team(leader)
     {
-        add(leader);
+        // no need to insert leader, it has already inserted from Team cunstrctor
     }
 
-    void Team2::add(Character *character)
+    void Team2::add(Character *newMember)
     {
         if (this->squad.size() == 10)
         {
             throw std::runtime_error("Team can has up to 10 members");
         }
+
+         if (newMember->isAssignedToTeam())
+        {
+            throw std::runtime_error("Character is already assigned to a team");
+        }
         
-        this->squad.push_back(character);
+        this->squad.push_back(newMember);
     }
 
     void Team2::attack(Team *enemy)

@@ -21,6 +21,12 @@ namespace ariel
 
     Point Point::moveTowards(Point origin, Point destination, double dist)
     {
+        if (dist < 0)
+        {
+            throw std::invalid_argument("Threre is no such a thing as negative distance");
+        }
+        
+
         double currentDistance = origin.distance(destination);
 
         if (currentDistance <= dist)

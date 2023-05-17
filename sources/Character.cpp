@@ -2,7 +2,7 @@
 namespace ariel
 {
     Character::Character() {}
-    Character::Character(string name, Point location, int hitPoints, int ninjaOrCowboy) : name(name), location(location), hitPoints(hitPoints), ninjaOrCowboy(ninjaOrCowboy) {}
+    Character::Character(string name, Point location, int hitPoints, int ninjaOrCowboy) : name(name), location(location), hitPoints(hitPoints), ninjaOrCowboy(ninjaOrCowboy), assignedToTeam(false) {}
 
     bool Character::isAlive() const
     {
@@ -47,7 +47,7 @@ namespace ariel
         }
     }
 
-    int Character::isNinjaOrCowboy() 
+    int Character::isNinjaOrCowboy()
     {
         return this->ninjaOrCowboy;
     }
@@ -57,5 +57,14 @@ namespace ariel
         return !this->isAlive();
     }
 
+    void Character::assignToTeam()
+    {
+        this->assignedToTeam = true;
+    }
+
+    bool Character::isAssignedToTeam()
+    {
+        return this->assignedToTeam;
+    }
 
 }

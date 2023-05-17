@@ -17,6 +17,7 @@ namespace ariel
         int hitPoints;
         string name;
         int ninjaOrCowboy; // cowboy = 1, ninja = 2
+        bool assignedToTeam;
 
         Character();
         Character(string name, Point po, int hp, int ninjaOrCowboy);
@@ -30,6 +31,8 @@ namespace ariel
         void hit(int points);
         int isNinjaOrCowboy();
         bool isDead();
+        void assignToTeam();
+        bool isAssignedToTeam();
         virtual string print() = 0;
 
         virtual ~Character() = default;                   // destructor

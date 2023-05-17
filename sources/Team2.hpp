@@ -10,7 +10,7 @@ namespace ariel
     public:
         Team2(Character * leader);
 
-        void add(Character *character) override;
+        void add(Character *newMember) override;
         void attack(Team *enemy) override;
         Character* pickTeamMember(Character* teamMember) override;
         int stillAlive() override;
