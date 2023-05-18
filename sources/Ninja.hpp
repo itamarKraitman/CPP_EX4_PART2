@@ -11,6 +11,7 @@ namespace ariel
 
     public:
         Ninja(string, Point, int, int);
+        
         virtual void move(const Character *other);
         virtual bool slash(Character *other);
         string print() override;

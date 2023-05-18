@@ -15,6 +15,18 @@ namespace ariel
         add(leader);
     }
 
+    Team::~Team()
+    {
+        for (Character *member : this->squad)
+        {
+            delete member;
+            member = nullptr;
+        }
+
+        this->squad.clear();
+        this->squad.shrink_to_fit();
+    }
+
     void Team::add(Character *newMember)
     {
         if (this->squad.size() == 10)

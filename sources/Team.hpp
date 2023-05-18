@@ -40,7 +40,7 @@ namespace ariel
         Character *pickVictim(Team *enemy);
         static bool compareCharacters(Character *first, Character *second);
 
-        virtual ~Team() = default;              // destructor
+        virtual ~Team();              // destructor
         Team(const Team &) = delete;            // Copy constructor
         Team &operator=(const Team &) = delete; // Copy assignment operator
         Team(Team &&) = delete;                 // Move constructor

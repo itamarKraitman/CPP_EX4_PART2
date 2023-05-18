@@ -20,7 +20,7 @@ namespace ariel
 
     public:
         Character();
-        Character(string name, Point po, int hp, int ninjaOrCowboy);
+        Character(string name, Point location, int hitPoints, int ninjaOrCowboy);
 
         bool isAlive() const;
         double distance(Character *);
