@@ -47,7 +47,7 @@ namespace ariel
         Character *victim;
 
         // atack the victim, if the victim dies, pick another victim, if all enemy's members are dead, the attack finishes
-        for (Character *attackTeamMember : this->getSquad())
+        for (auto attackTeamMember : this->getSquad())
         {
             victim = pickVictim(enemy);
             

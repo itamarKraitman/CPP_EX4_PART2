@@ -37,7 +37,7 @@ namespace ariel
         Character *getLeader();
         void setTeamLeader(Character *newLeader);
         void pickNewLeader();
-        Character *pickVictim(Team *enemy);
+        virtual Character *pickVictim(Team *enemy);
         static bool compareCharacters(Character *first, Character *second);
 
         virtual ~Team();              // destructor

@@ -60,9 +60,9 @@ namespace ariel
             this->pickNewLeader();
         }
 
-        Character * victim;
+        Character *victim;
         // atack the victim, if the victim dies, pick another victim, if all enemy's members are dead, the attack finishes
-        for (Character *attackTeamMember : this->squad)
+        for (auto attackTeamMember : this->squad)
         {
             // pick a victim, the closest to the leader
             victim = pickVictim(enemy);
@@ -152,7 +152,7 @@ namespace ariel
         double shortestDisToLeader = std::numeric_limits<double>::max();
         Character *closerToLeader;
 
-        for (Character *teamMember : this->squad)
+        for (auto teamMember : this->squad)
         {
             double currentDisToLeader = teamMember->distance(this->leader);
             if (teamMember->isAlive() && currentDisToLeader < shortestDisToLeader)
@@ -176,7 +176,7 @@ namespace ariel
         double shortestDisToLeader = std::numeric_limits<double>::max();
         Character *closerToLeader;
 
-        for (Character *teamMember : enemy->getSquad())
+        for (auto teamMember : enemy->getSquad())
         {
             double currentDisToLeader = teamMember->distance(this->leader);
             if (teamMember->isAlive() && currentDisToLeader < shortestDisToLeader)
@@ -208,14 +208,7 @@ namespace ariel
 
     bool Team::compareCharacters(Character *first, Character *second)
     {
-        if (dynamic_cast<Cowboy *>(first) && dynamic_cast<Ninja *>(second))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (dynamic_cast<Cowboy *>(first) && dynamic_cast<Ninja *>(second));
     }
 
 }

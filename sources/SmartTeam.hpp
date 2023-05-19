@@ -8,8 +8,10 @@ namespace ariel
     {
     public:
         SmartTeam(Character *);
-        void add(Character *character) override;
+        void add(Character *newMember) override;
         void attack(Team *enemy) override;
+        Character *pickVictim(Team *enemy) override;
+        vector<Character*> sortSquad(vector<Character*> squad, auto victim);
     };
 }
 
